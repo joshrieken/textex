@@ -1,5 +1,5 @@
 use Mix.Config
 
 config :textex,
-  username: "test",
+  sends_username: "test",
   password: "test"
