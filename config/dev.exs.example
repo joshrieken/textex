@@ -2,4 +2,6 @@ use Mix.Config
 
 config :textex,
   sends_username: "replace_me",
-  password: "and_me!"
+  password: "and_me!",
+  base_sends_uri: "https://app.grouptexting.com/api",
+  mode: :test
