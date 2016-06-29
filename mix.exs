@@ -3,12 +3,13 @@ defmodule Textex.Mixfile do
 
   def project do
     [
-      app:             :textex,
-      version:         "0.1.0",
-      elixir:          "~> 1.3",
-      build_embedded:  Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
-      deps:            deps(),
+      app:               :textex,
+      version:           "0.1.0",
+      elixir:            "~> 1.3",
+      build_embedded:    Mix.env == :prod,
+      start_permanent:   Mix.env == :prod,
+      deps:              deps(),
+      preferred_cli_env: [espec: :test],
     ]
   end
 
