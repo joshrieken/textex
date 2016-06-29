@@ -1,6 +1,6 @@
 # Textex
 
-Elixir wrapper for the [Ez Texting](http://www.eztexting.com/developers) SMS API.
+Elixir wrapper for the [EZ Texting](http://www.eztexting.com/developers) SMS API.
 
 ## Installation
 
