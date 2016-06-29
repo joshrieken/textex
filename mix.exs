@@ -9,7 +9,13 @@ defmodule Textex.Mixfile do
       build_embedded:    Mix.env == :prod,
       start_permanent:   Mix.env == :prod,
       deps:              deps(),
-      preferred_cli_env: [espec: :test],
+      preferred_cli_env: [
+        espec:        :test,
+        vcr:          :test,
+        "vcr.delete": :test,
+        "vcr.check":  :test,
+        "vcr.show":   :test,
+      ],
     ]
   end
 
