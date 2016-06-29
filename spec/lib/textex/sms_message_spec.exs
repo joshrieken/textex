@@ -51,8 +51,4 @@ defmodule Textex.SmsMessageSpec do
       end
     end
   end
-
-  describe "base_sends_uri" do
-
-  end
 end
