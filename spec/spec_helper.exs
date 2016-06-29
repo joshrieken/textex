@@ -1,6 +1,6 @@
 ESpec.configure fn(config) ->
   config.before fn ->
-    ExVCR.Config.cassette_library_dir("fixture/vcr_cassettes")
+    ExVCR.Config.cassette_library_dir("spec/fixtures/vcr_cassettes")
     :ok
   end
 

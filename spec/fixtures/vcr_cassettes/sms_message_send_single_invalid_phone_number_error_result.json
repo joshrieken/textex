@@ -1,0 +1,32 @@
+[
+  {
+    "request": {
+      "body": "phonenumber=(806)+584-3004&message=This+is+a+test+from+ACOP+server+HttpClientSpec&user=gvtsend&pass=n6zP4S-X_HHOT6c",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://app.grouptexting.com/api/sending"
+    },
+    "response": {
+      "body": "-106",
+      "headers": {
+        "Server": "nginx",
+        "Date": "Wed, 29 Jun 2016 18:02:57 GMT",
+        "Content-Type": "text/html;charset=UTF-8",
+        "Content-Length": "4",
+        "Connection": "keep-alive",
+        "Vary": "Accept-Encoding",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Set-Cookie": "PHPSESSID=jvt1hnuaa076ka6hcnaigc9t04; path=/",
+        "Expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+        "Pragma": "no-cache",
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
