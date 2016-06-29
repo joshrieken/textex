@@ -38,6 +38,7 @@ defmodule Textex.Mixfile do
     [
       {:httpoison, "~> 0.9.0"},
       {:espec,     "~> 0.8.22", only: :test},
+      {:exvcr,     "~> 0.7",    only: :test},
     ]
   end
 end
