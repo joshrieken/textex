@@ -3,12 +3,15 @@ defmodule Textex.Mixfile do
 
   def project do
     [
-      app:               :textex,
-      version:           "0.1.0",
-      elixir:            "~> 1.3",
-      build_embedded:    Mix.env == :prod,
-      start_permanent:   Mix.env == :prod,
-      deps:              deps(),
+      app:             :textex,
+      version:         "0.1.0",
+      elixir:          "~> 1.2",
+      build_embedded:  Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps:            deps(),
+      description:     description(),
+      package:         package(),
+      docs:            [extras: ["README.md", "CHANGELOG.md"]],
       preferred_cli_env: [
         espec:        :test,
         vcr:          :test,
@@ -28,6 +31,22 @@ defmodule Textex.Mixfile do
         :httpoison,
         :logger,
       ],
+    ]
+  end
+
+  # PRIVATE ##################################################
+
+  defp description do
+    """
+    Elixir wrapper around the EZ Texting API.
+    """
+  end
+
+  defp package do
+    [
+      maintainers: ["Joshua Rieken"],
+      links: %{"GitHub" => "https://github.com/facto/textex"},
+      files: ~w(mix.exs README.md CHANGELOG.md lib),
     ]
   end
 
