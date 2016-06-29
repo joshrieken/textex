@@ -45,6 +45,7 @@ defmodule Textex.Mixfile do
   defp package do
     [
       maintainers: ["Joshua Rieken"],
+      licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/facto/textex"},
       files: ~w(mix.exs README.md CHANGELOG.md lib),
     ]
