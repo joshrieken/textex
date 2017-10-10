@@ -62,9 +62,9 @@ defmodule Textex.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 0.9.0"},
-      {:espec,     "~> 0.8.22", only: :test},
-      {:exvcr,     "~> 0.7",    only: :test},
+      {:httpoison, "~> 0.9"},
+      {:espec,     "~> 0.8", only: :test},
+      {:exvcr,     "~> 0.7", only: :test},
     ]
   end
 end
