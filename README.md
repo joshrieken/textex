@@ -10,7 +10,7 @@ The package can be installed as:
 
     ```elixir
     def deps do
-      [{:textex, "~> 0.1.0"}]
+      [{:textex, "~> 0.2.1"}]
     end
     ```
 
