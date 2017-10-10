@@ -5,12 +5,12 @@ defmodule Textex.SmsMessageSpec do
   alias Textex.SmsMessage
 
   describe "send!" do
-    let :success_result,              do: HttpClient.sms_message_success_result
-    let :invalid_phone_number_result, do: HttpClient.invalid_phone_number_result
+    let :success_result,              do: HttpClient.sms_message_success_result()
+    let :invalid_phone_number_result, do: HttpClient.invalid_phone_number_result()
 
     context "when a list of SMS messages is given" do
       context "when the messages are valid" do
-        subject do: SmsMessage.send!(sms_messages)
+        subject do: SmsMessage.send!(sms_messages())
 
         let :sms_messages do
           [
@@ -27,17 +27,17 @@ defmodule Textex.SmsMessageSpec do
 
         let :success_results do
           [
-            success_result,
-            success_result,
+            success_result(),
+            success_result(),
           ]
         end
 
-        it do: should eq(success_results)
+        it do: should eq(success_results())
       end
     end
 
     context "when one SMS message is given" do
-      subject do: SmsMessage.send!(sms_message)
+      subject do: SmsMessage.send!(sms_message())
 
       context "when the message is valid" do
         let :sms_message do
@@ -47,7 +47,7 @@ defmodule Textex.SmsMessageSpec do
           }
         end
 
-        it do: should eq(success_result)
+        it do: should eq(success_result())
       end
     end
   end
