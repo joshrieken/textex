@@ -6,7 +6,7 @@ defmodule Textex.HttpClient do
   end
   def post_sms_message!(sms_message, _override_base_uri, :test) do
     case validate_sms_message(sms_message) do
-      :ok   -> sms_message_success_result
+      :ok   -> sms_message_success_result()
       error -> error
     end
   end
@@ -36,13 +36,13 @@ defmodule Textex.HttpClient do
 
   defp validate_sms_message(sms_message) do
     case sms_message.message do
-      nil      -> invalid_message_or_subject_error_result
+      nil      -> invalid_message_or_subject_error_result()
       _message -> :ok
     end
   end
 
   defp sends_credentials do
-    [user: sends_username, pass: password]
+    [user: sends_username(), pass: password()]
   end
 
   # defp lookups_credentials do
@@ -70,10 +70,10 @@ defmodule Textex.HttpClient do
   end
 
   defp sends_uri(nil) do
-    default_base_uri <> sends_path
+    default_base_uri() <> sends_path()
   end
   defp sends_uri(override_base_uri) do
-    override_base_uri <> sends_path
+    override_base_uri <> sends_path()
   end
 
   defp sms_message_body(sms_message) do
@@ -81,14 +81,14 @@ defmodule Textex.HttpClient do
       :form, [
         phonenumber: sms_message.phone_number,
         message:     sms_message.message,
-      ] ++ sends_credentials
+      ] ++ sends_credentials()
     }
   end
 
   defp processed_post_sms_message_response(response) do
     case response.body do
       "1" ->
-        sms_message_success_result
+        sms_message_success_result()
       "-1" ->
         {:error, "Invalid user and/or password or API is not allowed for your account"}
       "-2" ->
@@ -96,11 +96,11 @@ defmodule Textex.HttpClient do
       "-5" ->
         {:error, "Local opt out (the recipient/number is on your opt-out list.)"}
       "-7" ->
-        invalid_message_or_subject_error_result
+        invalid_message_or_subject_error_result()
       "-104" ->
         {:error, "Globally opted out phone number (the phone number has been opted out from all messages sent from our short code)"}
       "-106" ->
-        incorrectly_formatted_phone_number_error_result
+        incorrectly_formatted_phone_number_error_result()
       _ ->
         {:error, "Unknown error (please contact our support dept.)"}
     end

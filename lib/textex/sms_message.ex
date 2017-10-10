@@ -8,7 +8,7 @@ defmodule Textex.SmsMessage do
   end
 
   def send!(sms_message) do
-    HttpClient.post_sms_message!(sms_message, base_sends_uri)
+    HttpClient.post_sms_message!(sms_message, base_sends_uri())
   end
 
   def base_sends_uri do
