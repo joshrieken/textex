@@ -65,6 +65,7 @@ defmodule Textex.Mixfile do
       {:httpoison, "~> 0.9"},
       {:espec,     "~> 0.8", only: :test},
       {:exvcr,     "~> 0.7", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 end
