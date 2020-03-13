@@ -22,6 +22,41 @@ defmodule Textex.HttpClientSpec do
     HttpClient.invalid_message_or_subject_error_result()
   end
 
+  describe "get_retrieve_all_groups!" do
+    let :override_base_uri, do: nil
+
+    context "when the mode is :production" do
+
+      subject do
+        use_cassette(cassette()) do
+          result()
+        end
+      end
+
+      let :successful_result, do:
+      {:ok, [
+          %{"ContactCount" => 0, "ID" => 482969, "Name" => "Keyword", "Note" => ""},
+          %{"ContactCount" => 1, "ID" => 482968, "Name" => "Test", "Note" => ""},
+          %{"ContactCount" => 0, "ID" => 482970, "Name" => "Widget", "Note" => ""}
+        ]
+      }
+
+      context "when using the correct base URL" do
+
+        let :override_base_uri, do: Application.get_env(:textex, :base_sends_uri)
+
+        let :result, do: HttpClient.get_retrieve_all_groups(override_base_uri(), :production)
+
+        let :cassette, do: "group_retrieve_all_success"
+
+        it do: is_expected() |> to(eq(successful_result()))
+
+      end
+
+    end
+
+  end
+
   describe "post_sms_message!" do
     let :override_base_uri, do: nil
 

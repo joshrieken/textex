@@ -65,6 +65,18 @@ Textex.SmsMessage.send!(sms_messages)
 # => [{:ok, "Message sent"}, {:ok, "Message sent"}]
 ```
 
+### Getting the complete list of groups
+```elixir
+Textex.SmsGroups.retrieve_all()
+# => {:ok, [
+      %{"ContactCount" => 1, 
+      "ID" => 12345, 
+      "Name" => "Test", 
+      "Note" => "Test Users"}
+    ]
+}
+
+```
 ## TODO
 
 - [X] Support sending single and multiple SMS messages

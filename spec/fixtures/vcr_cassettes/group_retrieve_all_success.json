@@ -1,0 +1,34 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://app.grouptexting.com/groups?User=mroman%40tixtend.com&Password=xCYx9Dmcd%3BgBspvbCNsb&format=json"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"Response\":{\"Status\":\"Success\",\"Code\":200,\"Entries\":[{\"ID\":482969,\"Name\":\"Keyword\",\"Note\":\"\",\"ContactCount\":0},{\"ID\":482968,\"Name\":\"Test\",\"Note\":\"\",\"ContactCount\":1},{\"ID\":482970,\"Name\":\"Widget\",\"Note\":\"\",\"ContactCount\":0}]}}",
+      "headers": {
+        "Server": "nginx",
+        "Date": "Thu, 12 Mar 2020 22:26:24 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "PHPSESSID=4be16334d564a69ffaed58295c1158f1; path=/; secure",
+        "Expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "Pragma": "no-cache",
+        "X-Robots-Tag": "noindex, nofollow, nosnippet, noarchive",
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-XSS-Protection": "1; mode=block"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -1,15 +1,33 @@
 defmodule Textex.HttpClient do
   use HTTPoison.Base
 
+  def get_retrieve_all_groups(override_base_uri \\ nil) do
+    get_retrieve_all_groups(override_base_uri, mode())
+  end
+
+  def get_retrieve_all_groups(_override_base_uri, :test) do
+    get_success_result([
+      %{"ContactCount" => 1, "ID" => 482968, "Name" => "Test", "Note" => ""}
+    ])
+  end
+
+  def get_retrieve_all_groups(override_base_uri, :production) do
+    url = groups_uri(override_base_uri)
+    response = get!(url)
+    processed_get_response(response)
+  end
+
   def post_sms_message!(sms_message, override_base_uri \\ nil) do
     post_sms_message!(sms_message, override_base_uri, mode())
   end
+
   def post_sms_message!(sms_message, _override_base_uri, :test) do
     case validate_sms_message(sms_message) do
       :ok   -> sms_message_success_result()
       error -> error
     end
   end
+
   def post_sms_message!(sms_message, override_base_uri, :production) do
     case validate_sms_message(sms_message) do
       :ok   ->
@@ -22,6 +40,10 @@ defmodule Textex.HttpClient do
 
   def sms_message_success_result do
     {:ok, "Message sent"}
+  end
+
+  def get_success_result(result) do
+    {:ok, result}
   end
 
   def incorrectly_formatted_phone_number_error_result do
@@ -43,6 +65,10 @@ defmodule Textex.HttpClient do
 
   defp sends_credentials do
     [user: sends_username(), pass: password()]
+  end
+
+  defp get_credentials do
+    [User: sends_username(), Password: password()]
   end
 
   # defp lookups_credentials do
@@ -69,11 +95,21 @@ defmodule Textex.HttpClient do
     "/sending"
   end
 
+  defp groups_path do
+    "/groups"
+  end
+
   defp sends_uri(nil) do
     default_base_uri() <> sends_path()
   end
+  
   defp sends_uri(override_base_uri) do
     override_base_uri <> sends_path()
+  end
+
+  defp groups_uri(override_base_uri) do
+    query =  "?" <> URI.encode_query(get_credentials() ++ [format: "json"])
+    override_base_uri <> groups_path() <> query
   end
 
   defp sms_message_body(sms_message) do
@@ -103,6 +139,17 @@ defmodule Textex.HttpClient do
         incorrectly_formatted_phone_number_error_result()
       _ ->
         {:error, "Unknown error (please contact our support dept.)"}
+    end
+  end
+
+  defp processed_get_response(response) do
+    case response.body do
+      "-1" ->
+        {:error, "Invalid user and/or password or API is not allowed for your account"}
+      "-2" ->
+        {:error, "Credit limit reached"}
+      body ->
+        get_success_result(body |> Poison.decode! |> get_in(["Response", "Entries"]))
     end
   end
 

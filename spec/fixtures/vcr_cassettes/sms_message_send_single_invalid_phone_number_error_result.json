@@ -6,7 +6,7 @@
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "https://app.grouptexting.com/api/sending"
+      "url": "https://app.grouptexting.com/sending"
     },
     "response": {
       "body": "-106",

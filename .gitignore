@@ -18,3 +18,5 @@ erl_crash.dump
 
 dev.exs
 test.exs
+
+.DS_Store
