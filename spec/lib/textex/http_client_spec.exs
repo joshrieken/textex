@@ -23,6 +23,10 @@ defmodule Textex.HttpClientSpec do
     HttpClient.invalid_message_or_subject_error_result()
   end
 
+  let :insufficient_credits_error_result do
+    HttpClient.insufficient_credits_error_result()
+  end
+
   describe "get_retrieve_all_groups!" do
     let :override_base_uri, do: nil
 
@@ -148,6 +152,19 @@ defmodule Textex.HttpClientSpec do
           it do: is_expected() |> to(eq(invalid_message_or_subject_error_result()))
         end
 
+        context "with insufficient credits" do
+          let :sms_message do
+            %SmsMessage {
+              phone_number: real_valid_phone_number(),
+              message: "This is a test from ACOP server HttpClientSpec",
+            }
+          end
+
+          let :cassette, do: "sms_message_send_insufficient_funds_failure"
+
+          it do: is_expected() |> to(eq(insufficient_credits_error_result()))
+        end
+
         context "to groups" do
 
           let :sms_message do
@@ -158,7 +175,7 @@ defmodule Textex.HttpClientSpec do
           end
           let :cassette, do: "sms_message_send_single_group_success"
 
-          it do: is_expected() |> to(eq(sms_message_success_result))
+          it do: is_expected() |> to(eq(sms_message_success_result()))
         end
       end
     end
