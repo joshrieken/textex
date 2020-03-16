@@ -54,6 +54,10 @@ defmodule Textex.HttpClient do
     {:error, :forbidden, ["You currently do not have sufficient credits to send this campaign. Please purchase at least 1 credit(s) to send out this message."]}
   end
 
+  def invalid_group_error_result do
+    {:error, :forbidden, ["Groups: 'nongroup' was not found in the haystack"]}
+  end
+
   def invalid_message_or_subject_error_result do
     {:error, "Invalid message or subject"}
   end

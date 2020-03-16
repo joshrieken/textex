@@ -1,0 +1,29 @@
+[
+  {
+    "request": {
+      "body": "Message=This+is+a+test+from+ACOP+server+HttpClientSpec&User=mroman@tixtend.com&Password=xCYx9Dmcd%3bgBspvbCNsb&Groups=Nongroup",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://app.grouptexting.com/sending/messages?format=json"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"Response\":{\"Status\":\"Failure\",\"Code\":403,\"Errors\":[\"Groups: 'nongroup' was not found in the haystack\"]}}",
+      "headers": {
+        "Server": "nginx",
+        "Date": "Mon, 16 Mar 2020 15:25:14 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "PHPSESSID=3088dc887c110f3ed774b438ba7bab6d; path=/; secure",
+        "Expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "Pragma": "no-cache"
+      },
+      "status_code": 403,
+      "type": "ok"
+    }
+  }
+]
