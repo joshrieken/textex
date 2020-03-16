@@ -1,31 +1,28 @@
 [
   {
     "request": {
-      "body": "phonenumber=(806)+584-3004&message=This+is+a+test+from+ACOP+server+HttpClientSpec&user=gvtsend&pass=n6zP4S-X_HHOT6c",
+      "body": "Message=This+is+a+test+from+ACOP+server+HttpClientSpec&User=mroman@tixtend.com&Password=xCYx9Dmcd%3bgBspvbCNsb&PhoneNumbers=516429300",
       "headers": [],
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "https://app.grouptexting.com/sending"
+      "url": "https://app.grouptexting.com/sending/messages?format=json"
     },
     "response": {
-      "body": "-106",
+      "binary": false,
+      "body": "{\"Response\":{\"Status\":\"Failure\",\"Code\":403,\"Errors\":[\"PhoneNumbers: Please enter a valid phone number.\"]}}",
       "headers": {
         "Server": "nginx",
-        "Date": "Wed, 29 Jun 2016 18:02:57 GMT",
-        "Content-Type": "text/html;charset=UTF-8",
-        "Content-Length": "4",
+        "Date": "Mon, 16 Mar 2020 13:43:31 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
         "Connection": "keep-alive",
-        "Vary": "Accept-Encoding",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Set-Cookie": "PHPSESSID=jvt1hnuaa076ka6hcnaigc9t04; path=/",
+        "Set-Cookie": "PHPSESSID=fe5021d5a29f10d5001fc13a853162c4; path=/; secure",
         "Expires": "Thu, 19 Nov 1981 08:52:00 GMT",
-        "Cache-Control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
-        "Pragma": "no-cache",
-        "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
-        "X-Content-Type-Options": "nosniff"
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "Pragma": "no-cache"
       },
-      "status_code": 200,
+      "status_code": 403,
       "type": "ok"
     }
   }

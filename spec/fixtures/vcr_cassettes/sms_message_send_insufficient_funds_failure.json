@@ -10,19 +10,19 @@
     },
     "response": {
       "binary": false,
-      "body": "{\"Response\":{\"Status\":\"Success\",\"Code\":201,\"Entry\":{\"ID\":19816537,\"Subject\":\"\",\"Message\":\"This is a test from ACOP server HttpClientSpec\",\"MessageTypeID\":1,\"RecipientsCount\":1,\"Credits\":1,\"StampToSend\":\"03-16-2020 9:44 AM\",\"SendToNewRecipients\":0,\"PhoneNumbers\":[\"5164293004\"],\"Groups\":[]}}}",
+      "body": "{\"Response\":{\"Status\":\"Failure\",\"Code\":403,\"Errors\":[\"You currently do not have sufficient credits to send this campaign. Please purchase at least 1 credit(s) to send out this message.\"]}}",
       "headers": {
         "Server": "nginx",
-        "Date": "Mon, 16 Mar 2020 13:44:37 GMT",
+        "Date": "Mon, 16 Mar 2020 13:32:45 GMT",
         "Content-Type": "application/json",
         "Transfer-Encoding": "chunked",
         "Connection": "keep-alive",
-        "Set-Cookie": "PHPSESSID=75deeed38c92adb466763162c88bbe74; path=/; secure",
+        "Set-Cookie": "PHPSESSID=19162f58a7759022fc6a2d9f22a0843b; path=/; secure",
         "Expires": "Thu, 19 Nov 1981 08:52:00 GMT",
         "Cache-Control": "no-store, no-cache, must-revalidate",
         "Pragma": "no-cache"
       },
-      "status_code": 201,
+      "status_code": 403,
       "type": "ok"
     }
   }
