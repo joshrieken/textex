@@ -1,7 +1,7 @@
 defmodule Textex.SmsMessage do
   alias Textex.HttpClient
 
-  defstruct [:phone_number, :message, :groups]
+  defstruct [:phone_number, :message, :groups, :stamp_to_send]
 
   def send!(sms_messages) when is_list(sms_messages) do
     Enum.map(sms_messages, &send!(&1))

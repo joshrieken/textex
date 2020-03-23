@@ -62,6 +62,10 @@ defmodule Textex.HttpClient do
     {:error, "Invalid message or subject"}
   end
 
+  def invalid_stamp_error_result(stamp) do
+    {:error, :forbidden, ["StampToSend: \'#{stamp}\' does not appear to be a valid date"]}
+  end
+
   # PRIVATE ##################################################
 
   defp validate_sms_message(sms_message) do
@@ -134,6 +138,12 @@ defmodule Textex.HttpClient do
 
     form = if sms_message.phone_number do
       form ++ [PhoneNumbers: [sms_message.phone_number]]
+    else
+      form
+    end
+
+    form = if sms_message.stamp_to_send do
+      form ++ [StampToSend: sms_message.stamp_to_send]
     else
       form
     end

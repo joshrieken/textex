@@ -32,6 +32,10 @@ defmodule Textex.HttpClientSpec do
     HttpClient.insufficient_credits_error_result()
   end
 
+  let :invalid_stamp_error_result do
+    HttpClient.invalid_stamp_error_result("yesterday")
+  end
+
   describe "get_retrieve_all_groups!" do
     let :override_base_uri, do: nil
 
@@ -182,7 +186,7 @@ defmodule Textex.HttpClientSpec do
 
           it do: is_expected() |> to(eq(sms_message_success_result()))
         end
-        
+
         context "with an invalid group" do
 
           let :sms_message do
@@ -194,6 +198,41 @@ defmodule Textex.HttpClientSpec do
           let :cassette, do: "sms_message_send_invalid_group_error_result"
 
           it do: is_expected() |> to(eq(invalid_group_error_result()))
+        end
+
+        context "with a valid stamp_to_send" do
+
+          with {:ok, datetime} <- DateTime.now("Etc/UTC"),
+               {:ok, future}   <- DateTime.add(datetime, 300, :second),
+               {:ok, unix}      <- DateTime.to_unix(future, :second) do
+
+            let :sms_message do
+              %SmsMessage {
+                phone_number:  real_valid_phone_number(),
+                message:       "This is a test from ACOP server HttpClientSpec",
+                stamp_to_send: unix
+              }
+            end
+            let :cassette, do: "sms_message_send_valid_stamp_to_send_success_result"
+
+            it do: is_expected() |> to(eq(sms_message_success_result()))
+          end
+
+        end
+
+        context "with an invalid stamp_to_send" do
+
+          let :stamp, do: "yesterday"
+          let :sms_message do
+            %SmsMessage {
+              phone_number:  real_valid_phone_number(),
+              message:       "This is a test from ACOP server HttpClientSpec",
+              stamp_to_send: stamp
+            }
+          end
+          let :cassette, do: "sms_message_send_invalid_stamp_to_send_error_result"
+
+          it do: is_expected() |> to(eq(invalid_stamp_error_result()))
         end
       end
     end

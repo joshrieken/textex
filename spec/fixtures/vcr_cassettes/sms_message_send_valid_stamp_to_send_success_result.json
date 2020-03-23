@@ -1,0 +1,29 @@
+[
+  {
+    "request": {
+      "body": "Message=This+is+a+test+from+ACOP+server+HttpClientSpec&User=mroman@tixtend.com&Password=xCYx9Dmcd%3bgBspvbCNsb&PhoneNumbers=5164293004&StampToSend=1584888746",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://app.grouptexting.com/sending/messages?format=json"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"Response\":{\"Status\":\"Success\",\"Code\":201,\"Entry\":{\"ID\":19840366,\"Subject\":\"\",\"Message\":\"This is a test from ACOP server HttpClientSpec\",\"MessageTypeID\":1,\"RecipientsCount\":1,\"Credits\":1,\"StampToSend\":\"03-22-2020 10:52 AM\",\"SendToNewRecipients\":0,\"PhoneNumbers\":[\"5164293004\"],\"Groups\":[]}}}",
+      "headers": {
+        "Server": "nginx",
+        "Date": "Sun, 22 Mar 2020 14:47:33 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "PHPSESSID=290ff0d6e0c08c2b15a82264dbaad75e; path=/; secure",
+        "Expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "Pragma": "no-cache"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]

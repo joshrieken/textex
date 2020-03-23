@@ -1,0 +1,29 @@
+[
+  {
+    "request": {
+      "body": "Message=This+is+a+test+from+ACOP+server+HttpClientSpec&User=mroman@tixtend.com&Password=xCYx9Dmcd%3bgBspvbCNsb&PhoneNumbers=5164293004&StampToSend=yesterday",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://app.grouptexting.com/sending/messages?format=json"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"Response\":{\"Status\":\"Failure\",\"Code\":403,\"Errors\":[\"StampToSend: 'yesterday' does not appear to be a valid date\"]}}",
+      "headers": {
+        "Server": "nginx",
+        "Date": "Mon, 23 Mar 2020 18:56:27 GMT",
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Set-Cookie": "PHPSESSID=41c267b342e2c6a81fa9c8ed5bb60d88; path=/; secure",
+        "Expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "Pragma": "no-cache"
+      },
+      "status_code": 403,
+      "type": "ok"
+    }
+  }
+]
