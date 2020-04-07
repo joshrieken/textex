@@ -47,11 +47,23 @@ defmodule Textex.HttpClient do
   end
 
   def incorrectly_formatted_phone_number_error_result do
-    {:error, "Incorrectly formatted phone number (number must be 10 digits)"}
+    {:error, :forbidden, ["PhoneNumbers: Please enter a valid phone number."]}
+  end
+
+  def insufficient_credits_error_result do
+    {:error, :forbidden, ["You currently do not have sufficient credits to send this campaign. Please purchase at least 1 credit(s) to send out this message."]}
+  end
+
+  def invalid_group_error_result do
+    {:error, :forbidden, ["Groups: 'nongroup' was not found in the haystack"]}
   end
 
   def invalid_message_or_subject_error_result do
     {:error, "Invalid message or subject"}
+  end
+
+  def invalid_stamp_error_result(stamp) do
+    {:error, :forbidden, ["StampToSend: \'#{stamp}\' does not appear to be a valid date"]}
   end
 
   # PRIVATE ##################################################
@@ -64,7 +76,7 @@ defmodule Textex.HttpClient do
   end
 
   defp sends_credentials do
-    [user: sends_username(), pass: password()]
+    [User: sends_username(), Password: password()]
   end
 
   defp get_credentials do
@@ -92,7 +104,7 @@ defmodule Textex.HttpClient do
   end
 
   defp sends_path do
-    "/sending"
+    "/sending/messages"
   end
 
   defp groups_path do
@@ -102,9 +114,10 @@ defmodule Textex.HttpClient do
   defp sends_uri(nil) do
     default_base_uri() <> sends_path()
   end
-  
+ 
   defp sends_uri(override_base_uri) do
-    override_base_uri <> sends_path()
+    query =  "?" <> URI.encode_query([format: "json"])
+    override_base_uri <> sends_path() <> query
   end
 
   defp groups_uri(override_base_uri) do
@@ -113,32 +126,46 @@ defmodule Textex.HttpClient do
   end
 
   defp sms_message_body(sms_message) do
-    {
-      :form, [
-        phonenumber: sms_message.phone_number,
-        message:     sms_message.message,
-      ] ++ sends_credentials()
-    }
+    form = [
+      Message:     sms_message.message,
+    ] ++ sends_credentials() 
+
+    form = if sms_message.groups do
+      form ++ [Groups: sms_message.groups]
+    else
+      form
+    end
+
+    form = if sms_message.phone_number do
+      form ++ [PhoneNumbers: [sms_message.phone_number]]
+    else
+      form
+    end
+
+    form = if sms_message.stamp_to_send do
+      form ++ [StampToSend: sms_message.stamp_to_send]
+    else
+      form
+    end
+
+    {:form, form}
   end
 
   defp processed_post_sms_message_response(response) do
-    case response.body do
-      "1" ->
-        sms_message_success_result()
-      "-1" ->
-        {:error, "Invalid user and/or password or API is not allowed for your account"}
-      "-2" ->
-        {:error, "Credit limit reached"}
-      "-5" ->
-        {:error, "Local opt out (the recipient/number is on your opt-out list.)"}
-      "-7" ->
-        invalid_message_or_subject_error_result()
-      "-104" ->
-        {:error, "Globally opted out phone number (the phone number has been opted out from all messages sent from our short code)"}
-      "-106" ->
-        incorrectly_formatted_phone_number_error_result()
-      _ ->
-        {:error, "Unknown error (please contact our support dept.)"}
+    with code <- response.body |> Poison.decode! |> get_in(["Response","Code"]),
+         errors <- response.body |> Poison.decode! |> get_in(["Response", "Errors"]) do
+      case code do
+        201 ->
+          sms_message_success_result()
+        401 ->
+          {:error, :unauthorized, errors}
+        403 ->
+          {:error, :forbidden, errors}
+        500 ->
+          {:error, :unkown, errors}
+        _ ->
+          {:error, "Unexpected error (please contact our support dept.)"}
+      end
     end
   end
 
